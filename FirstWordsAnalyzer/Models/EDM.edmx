@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FirstWordsAnalyzerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
+          <Property Name="PublishingYear" Type="date" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cognates">
+          <Key>
+            <PropertyRef Name="BasicWordId" />
+            <PropertyRef Name="DerivedWordId" />
+          </Key>
+          <Property Name="BasicWordId" Type="int" Nullable="false" />
+          <Property Name="DerivedWordId" Type="int" Nullable="false" />
+          <Property Name="WordPart" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="WrongAssociation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sentences">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SentenceWords">
+          <Key>
+            <PropertyRef Name="SentenceId" />
+            <PropertyRef Name="WordId" />
+          </Key>
+          <Property Name="SentenceId" Type="int" Nullable="false" />
+          <Property Name="WordId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Words">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="FirstTranslationVariant" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondTranslationVariant" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThirdTranslationVariant" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoSense" Type="bit" Nullable="false" />
+          <Property Name="NotBasic" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WordsParts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Kind" Type="bit" Nullable="false" />
+          <Property Name="Length" Type="decimal" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Cognates__BasicW__267ABA7A">
+          <End Role="Words" Type="Self.Words" Multiplicity="1" />
+          <End Role="Cognates" Type="Self.Cognates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Words">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cognates">
+              <PropertyRef Name="BasicWordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cognates__Derive__276EDEB3">
+          <End Role="Words" Type="Self.Words" Multiplicity="1" />
+          <End Role="Cognates" Type="Self.Cognates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Words">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cognates">
+              <PropertyRef Name="DerivedWordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sentences__BookI__173876EA">
+          <End Role="Books" Type="Self.Books" Multiplicity="1" />
+          <End Role="Sentences" Type="Self.Sentences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sentences">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SentenceW__Sente__1A14E395">
+          <End Role="Sentences" Type="Self.Sentences" Multiplicity="1" />
+          <End Role="SentenceWords" Type="Self.SentenceWords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sentences">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SentenceWords">
+              <PropertyRef Name="SentenceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SentenceW__WordI__1DE57479">
+          <End Role="Words" Type="Self.Words" Multiplicity="1" />
+          <End Role="SentenceWords" Type="Self.SentenceWords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Words">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SentenceWords">
+              <PropertyRef Name="WordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FirstWordsAnalyzerModelStoreContainer">
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cognates" EntityType="Self.Cognates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sentences" EntityType="Self.Sentences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SentenceWords" EntityType="Self.SentenceWords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Words" EntityType="Self.Words" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WordsParts" EntityType="Self.WordsParts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cognates__BasicW__267ABA7A" Association="Self.FK__Cognates__BasicW__267ABA7A">
+            <End Role="Words" EntitySet="Words" />
+            <End Role="Cognates" EntitySet="Cognates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cognates__Derive__276EDEB3" Association="Self.FK__Cognates__Derive__276EDEB3">
+            <End Role="Words" EntitySet="Words" />
+            <End Role="Cognates" EntitySet="Cognates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sentences__BookI__173876EA" Association="Self.FK__Sentences__BookI__173876EA">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Sentences" EntitySet="Sentences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SentenceW__Sente__1A14E395" Association="Self.FK__SentenceW__Sente__1A14E395">
+            <End Role="Sentences" EntitySet="Sentences" />
+            <End Role="SentenceWords" EntitySet="SentenceWords" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SentenceW__WordI__1DE57479" Association="Self.FK__SentenceW__WordI__1DE57479">
+            <End Role="Words" EntitySet="Words" />
+            <End Role="SentenceWords" EntitySet="SentenceWords" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FirstWordsAnalyzerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PublishingYear" Type="DateTime" Precision="0" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sentences" Relationship="Self.FK__Sentences__BookI__173876EA" FromRole="Books" ToRole="Sentences" />
+        </EntityType>
+        <EntityType Name="Sentence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Book" Relationship="Self.FK__Sentences__BookI__173876EA" FromRole="Sentences" ToRole="Books" />
+          <NavigationProperty Name="Words" Relationship="Self.SentenceWords" FromRole="Sentences" ToRole="Words" />
+        </EntityType>
+        <EntityType Name="Word">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThirdTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoSense" Type="Boolean" Nullable="false" />
+          <Property Name="NotBasic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Sentences" Relationship="Self.SentenceWords" FromRole="Words" ToRole="Sentences" />
+          <NavigationProperty Name="Cognates" Relationship="FirstWordsAnalyzerModel.FK__Cognates__BasicW__267ABA7A" FromRole="Word" ToRole="Cognate" />
+          <NavigationProperty Name="Cognates1" Relationship="FirstWordsAnalyzerModel.FK__Cognates__Derive__276EDEB3" FromRole="Word" ToRole="Cognate" />
+        </EntityType>
+        <EntityType Name="WordsPart">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Kind" />
+            <PropertyRef Name="Length" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Kind" Type="Boolean" Nullable="false" />
+          <Property Name="Length" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Sentences__BookI__173876EA">
+          <End Role="Books" Type="Self.Book" Multiplicity="1" />
+          <End Role="Sentences" Type="Self.Sentence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Books">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sentences">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SentenceWords">
+          <End Role="Sentences" Type="Self.Sentence" Multiplicity="*" />
+          <End Role="Words" Type="Self.Word" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="FirstWordsAnalyzerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Sentences" EntityType="Self.Sentence" />
+          <EntitySet Name="Words" EntityType="Self.Word" />
+          <EntitySet Name="WordsParts" EntityType="Self.WordsPart" />
+          <AssociationSet Name="FK__Sentences__BookI__173876EA" Association="Self.FK__Sentences__BookI__173876EA">
+            <End Role="Books" EntitySet="Books" />
+            <End Role="Sentences" EntitySet="Sentences" />
+          </AssociationSet>
+          <AssociationSet Name="SentenceWords" Association="Self.SentenceWords">
+            <End Role="Sentences" EntitySet="Sentences" />
+            <End Role="Words" EntitySet="Words" />
+          </AssociationSet>
+          <EntitySet Name="Cognates" EntityType="FirstWordsAnalyzerModel.Cognate" />
+          <AssociationSet Name="FK__Cognates__BasicW__267ABA7A" Association="FirstWordsAnalyzerModel.FK__Cognates__BasicW__267ABA7A">
+            <End Role="Word" EntitySet="Words" />
+            <End Role="Cognate" EntitySet="Cognates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cognates__Derive__276EDEB3" Association="FirstWordsAnalyzerModel.FK__Cognates__Derive__276EDEB3">
+            <End Role="Word" EntitySet="Words" />
+            <End Role="Cognate" EntitySet="Cognates" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cognate">
+          <Key>
+            <PropertyRef Name="BasicWordId" />
+            <PropertyRef Name="DerivedWordId" />
+          </Key>
+          <Property Name="BasicWordId" Type="Int32" Nullable="false" />
+          <Property Name="DerivedWordId" Type="Int32" Nullable="false" />
+          <Property Name="WordPart" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="WrongAssociation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Word" Relationship="FirstWordsAnalyzerModel.FK__Cognates__BasicW__267ABA7A" FromRole="Cognate" ToRole="Word" />
+          <NavigationProperty Name="Word1" Relationship="FirstWordsAnalyzerModel.FK__Cognates__Derive__276EDEB3" FromRole="Cognate" ToRole="Word" />
+        </EntityType>
+        <Association Name="FK__Cognates__BasicW__267ABA7A">
+          <End Type="FirstWordsAnalyzerModel.Word" Role="Word" Multiplicity="1" />
+          <End Type="FirstWordsAnalyzerModel.Cognate" Role="Cognate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Word">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cognate">
+              <PropertyRef Name="BasicWordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cognates__Derive__276EDEB3">
+          <End Type="FirstWordsAnalyzerModel.Word" Role="Word" Multiplicity="1" />
+          <End Type="FirstWordsAnalyzerModel.Cognate" Role="Cognate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Word">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cognate">
+              <PropertyRef Name="DerivedWordId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FirstWordsAnalyzerModelStoreContainer" CdmEntityContainer="FirstWordsAnalyzerEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="PublishingYear" ColumnName="PublishingYear" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sentences">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.Sentence">
+              <MappingFragment StoreEntitySet="Sentences">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Words">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.Word">
+              <MappingFragment StoreEntitySet="Words">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="FirstTranslationVariant" ColumnName="FirstTranslationVariant" />
+                <ScalarProperty Name="SecondTranslationVariant" ColumnName="SecondTranslationVariant" />
+                <ScalarProperty Name="ThirdTranslationVariant" ColumnName="ThirdTranslationVariant" />
+                <ScalarProperty Name="NoSense" ColumnName="NoSense" />
+                <ScalarProperty Name="NotBasic" ColumnName="NotBasic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WordsParts">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.WordsPart">
+              <MappingFragment StoreEntitySet="WordsParts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kind" ColumnName="Kind" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SentenceWords" TypeName="FirstWordsAnalyzerModel.SentenceWords" StoreEntitySet="SentenceWords">
+            <EndProperty Name="Sentences">
+              <ScalarProperty Name="Id" ColumnName="SentenceId" />
+            </EndProperty>
+            <EndProperty Name="Words">
+              <ScalarProperty Name="Id" ColumnName="WordId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Cognates">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.Cognate">
+              <MappingFragment StoreEntitySet="Cognates">
+                <ScalarProperty Name="WrongAssociation" ColumnName="WrongAssociation" />
+                <ScalarProperty Name="WordPart" ColumnName="WordPart" />
+                <ScalarProperty Name="DerivedWordId" ColumnName="DerivedWordId" />
+                <ScalarProperty Name="BasicWordId" ColumnName="BasicWordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

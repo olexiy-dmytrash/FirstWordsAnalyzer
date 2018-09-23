@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2e1b3bbe73084b91b113a51f3df797fa" Name="Diagram1">
+        <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Book" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Sentence" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Word" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirstWordsAnalyzerModel.WordsPart" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="FirstWordsAnalyzerModel.FK__Sentences__BookI__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="FirstWordsAnalyzerModel.SentenceWords" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Cognate" Width="1.5" PointX="7.5" PointY="1.375" />
+        <AssociationConnector Association="FirstWordsAnalyzerModel.FK__Cognates__BasicW__267ABA7A" />
+        <AssociationConnector Association="FirstWordsAnalyzerModel.FK__Cognates__Derive__276EDEB3" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
