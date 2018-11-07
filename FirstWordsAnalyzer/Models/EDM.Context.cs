@@ -28,7 +28,6 @@ namespace FirstWordsAnalyzer.Models
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Sentence> Sentences { get; set; }
         public virtual DbSet<Word> Words { get; set; }
-        public virtual DbSet<WordsPart> WordsParts { get; set; }
         public virtual DbSet<Cognate> Cognates { get; set; }
     }
 }

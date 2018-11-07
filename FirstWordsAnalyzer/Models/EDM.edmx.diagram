@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Book" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Sentence" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Word" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FirstWordsAnalyzerModel.WordsPart" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="FirstWordsAnalyzerModel.FK__Sentences__BookI__173876EA" ManuallyRouted="false" />
         <AssociationConnector Association="FirstWordsAnalyzerModel.SentenceWords" ManuallyRouted="false" />
         <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Cognate" Width="1.5" PointX="7.5" PointY="1.375" />
