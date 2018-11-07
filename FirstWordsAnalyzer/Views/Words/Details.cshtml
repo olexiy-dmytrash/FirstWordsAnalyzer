@@ -1,0 +1,66 @@
+﻿@model FirstWordsAnalyzer.Models.Word
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Word</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThirdTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoSense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoSense)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotBasic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotBasic)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

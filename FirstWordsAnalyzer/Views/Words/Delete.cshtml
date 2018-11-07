@@ -1,0 +1,72 @@
+﻿@model FirstWordsAnalyzer.Models.Word
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Word</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThirdTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoSense)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoSense)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NotBasic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NotBasic)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
