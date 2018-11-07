@@ -17,7 +17,7 @@ namespace FirstWordsAnalyzer.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Word()
         {
-            this.Sentences = new HashSet<Sentence>();
+            this.SentenceWords = new HashSet<SentenceWord>();
             this.Cognates = new HashSet<Cognate>();
             this.Cognates1 = new HashSet<Cognate>();
         }
@@ -31,7 +31,7 @@ namespace FirstWordsAnalyzer.Models
         public bool NotBasic { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sentence> Sentences { get; set; }
+        public virtual ICollection<SentenceWord> SentenceWords { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cognate> Cognates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

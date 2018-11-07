@@ -12,15 +12,13 @@ namespace FirstWordsAnalyzer.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cognate
+    public partial class SentenceWord
     {
-        public int BasicWordId { get; set; }
-        public int DerivedWordId { get; set; }
-        public string WordPart { get; set; }
-        public bool WrongAssociation { get; set; }
-        public int Id { get; set; }
+        public int SentenceId { get; set; }
+        public int WordId { get; set; }
+        public decimal Number { get; set; }
     
+        public virtual Sentence Sentence { get; set; }
         public virtual Word Word { get; set; }
-        public virtual Word Word1 { get; set; }
     }
 }

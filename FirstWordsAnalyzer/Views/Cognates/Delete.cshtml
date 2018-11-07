@@ -1,0 +1,64 @@
+﻿@model FirstWordsAnalyzer.Models.Cognate
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Cognate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WordPart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WordPart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WrongAssociation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WrongAssociation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Word.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Word1.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word1.Text)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,58 @@
+﻿@model FirstWordsAnalyzer.Models.Cognate
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cognate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WordPart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WordPart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WrongAssociation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WrongAssociation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Word.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Word1.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word1.Text)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

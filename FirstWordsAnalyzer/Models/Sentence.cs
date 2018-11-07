@@ -17,15 +17,16 @@ namespace FirstWordsAnalyzer.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sentence()
         {
-            this.Words = new HashSet<Word>();
+            this.SentenceWords = new HashSet<SentenceWord>();
         }
     
         public int Id { get; set; }
         public int BookId { get; set; }
         public string Text { get; set; }
+        public decimal Length { get; set; }
     
         public virtual Book Book { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Word> Words { get; set; }
+        public virtual ICollection<SentenceWord> SentenceWords { get; set; }
     }
 }
