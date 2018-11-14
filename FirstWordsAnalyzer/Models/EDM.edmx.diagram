@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="FirstWordsAnalyzerModel.Cognate" Width="1.5" PointX="3" PointY="4.375" />
         <AssociationConnector Association="FirstWordsAnalyzerModel.FK__Cognates__BasicW__5812160E" />
         <AssociationConnector Association="FirstWordsAnalyzerModel.FK__Cognates__Derive__59063A47" />
+        <EntityTypeShape EntityType="FirstWordsAnalyzerModel.WordsPopularityWithCognates2" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

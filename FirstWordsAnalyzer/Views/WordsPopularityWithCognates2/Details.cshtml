@@ -1,0 +1,66 @@
+﻿@model FirstWordsAnalyzer.Models.WordsPopularityWithCognates2
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WordsPopularityWithCognates2</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThirdTranslationVariant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThirdTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Differance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Differance)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WordId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

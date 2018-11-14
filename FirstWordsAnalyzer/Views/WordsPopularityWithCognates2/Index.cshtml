@@ -1,0 +1,67 @@
+﻿@model PagedList.IPagedList<FirstWordsAnalyzer.Models.WordsPopularityWithCognates2>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Text
+        </th>
+        <th>
+            First Translation
+        </th>
+        <th>
+            Second Translation
+        </th>
+        <th>
+            Third Translation
+        </th>
+        <th>
+           Quantity
+        </th>
+        <th>
+            Differance
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstTranslationVariant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondTranslationVariant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThirdTranslationVariant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Differance)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Words", new { id = item.WordId }, null) |
+                @Html.ActionLink("Details", "Details", new { id = item.WordId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+Страница @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

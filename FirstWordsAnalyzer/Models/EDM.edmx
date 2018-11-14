@@ -55,6 +55,20 @@
           <Property Name="NoSense" Type="bit" Nullable="false" />
           <Property Name="NotBasic" Type="bit" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WordsPopularityWithCognates2">
+          <Key>
+            <PropertyRef Name="WordId" />
+          </Key>
+          <Property Name="WordId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="16" />
+          <Property Name="FirstTranslationVariant" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondTranslationVariant" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThirdTranslationVariant" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Differance" Type="int" />
+        </EntityType>
         <Association Name="FK__Cognates__BasicW__5812160E">
           <End Role="Words" Type="Self.Words" Multiplicity="1" />
           <End Role="Cognates" Type="Self.Cognates" Multiplicity="*" />
@@ -115,12 +129,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetChainOfDerivedWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="basicWordId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetChainOfDerivedWordsWithContext" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="basicWordId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="FirstWordsAnalyzerModelStoreContainer">
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cognates" EntityType="Self.Cognates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sentences" EntityType="Self.Sentences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SentenceWords" EntityType="Self.SentenceWords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Words" EntityType="Self.Words" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WordsPopularityWithCognates2" EntityType="Self.WordsPopularityWithCognates2" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WordsPopularityWithCognates2].[WordId] AS [WordId], 
+    [WordsPopularityWithCognates2].[Text] AS [Text], 
+    [WordsPopularityWithCognates2].[FirstTranslationVariant] AS [FirstTranslationVariant], 
+    [WordsPopularityWithCognates2].[SecondTranslationVariant] AS [SecondTranslationVariant], 
+    [WordsPopularityWithCognates2].[ThirdTranslationVariant] AS [ThirdTranslationVariant], 
+    [WordsPopularityWithCognates2].[Quantity] AS [Quantity], 
+    [WordsPopularityWithCognates2].[Differance] AS [Differance]
+    FROM [dbo].[WordsPopularityWithCognates2] AS [WordsPopularityWithCognates2]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Cognates__BasicW__5812160E" Association="Self.FK__Cognates__BasicW__5812160E">
             <End Role="Words" EntitySet="Words" />
             <End Role="Cognates" EntitySet="Cognates" />
@@ -172,6 +203,13 @@
             <End Role="Word" EntitySet="Words" />
             <End Role="Cognate" EntitySet="Cognates" />
           </AssociationSet>
+          <EntitySet Name="WordsPopularityWithCognates2" EntityType="FirstWordsAnalyzerModel.WordsPopularityWithCognates2" />
+          <FunctionImport Name="GetChainOfDerivedWords" ReturnType="Collection(FirstWordsAnalyzerModel.GetChainOfDerivedWords_Result)">
+          <Parameter Name="basicWordId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetChainOfDerivedWordsWithContext" ReturnType="Collection(FirstWordsAnalyzerModel.GetChainOfDerivedWordsWithContext_Result)">
+            <Parameter Name="basicWordId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Book">
           <Key>
@@ -293,6 +331,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="WordsPopularityWithCognates2">
+          <Key>
+            <PropertyRef Name="WordId" />
+          </Key>
+          <Property Name="WordId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="FirstTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThirdTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Differance" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="GetChainOfDerivedWords_Result">
+          <Property Type="Int32" Name="BasicWordId" Nullable="true" />
+          <Property Type="Int32" Name="DerivedWordId" Nullable="true" />
+          <Property Type="Int32" Name="distance" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetChainOfDerivedWordsWithContext_Result">
+          <Property Type="Int32" Name="BasicWordId" Nullable="true" />
+          <Property Type="Int32" Name="DerivedWordId" Nullable="true" />
+          <Property Type="Int32" Name="distance" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="String" Name="WordText" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="FirstTranslationVariant" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SentenceId" Nullable="false" />
+          <Property Type="String" Name="SentenceText" Nullable="false" MaxLength="300" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -352,6 +418,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="WordsPopularityWithCognates2">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.WordsPopularityWithCognates2">
+              <MappingFragment StoreEntitySet="WordsPopularityWithCognates2">
+                <ScalarProperty Name="Differance" ColumnName="Differance" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ThirdTranslationVariant" ColumnName="ThirdTranslationVariant" />
+                <ScalarProperty Name="SecondTranslationVariant" ColumnName="SecondTranslationVariant" />
+                <ScalarProperty Name="FirstTranslationVariant" ColumnName="FirstTranslationVariant" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="WordId" ColumnName="WordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetChainOfDerivedWords" FunctionName="FirstWordsAnalyzerModel.Store.GetChainOfDerivedWords">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FirstWordsAnalyzerModel.GetChainOfDerivedWords_Result">
+                <ScalarProperty Name="BasicWordId" ColumnName="BasicWordId" />
+                <ScalarProperty Name="DerivedWordId" ColumnName="DerivedWordId" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetChainOfDerivedWordsWithContext" FunctionName="FirstWordsAnalyzerModel.Store.GetChainOfDerivedWordsWithContext">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FirstWordsAnalyzerModel.GetChainOfDerivedWordsWithContext_Result">
+                <ScalarProperty Name="BasicWordId" ColumnName="BasicWordId" />
+                <ScalarProperty Name="DerivedWordId" ColumnName="DerivedWordId" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="WordText" ColumnName="WordText" />
+                <ScalarProperty Name="FirstTranslationVariant" ColumnName="FirstTranslationVariant" />
+                <ScalarProperty Name="SentenceId" ColumnName="SentenceId" />
+                <ScalarProperty Name="SentenceText" ColumnName="SentenceText" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

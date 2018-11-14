@@ -1,0 +1,144 @@
+﻿@model IEnumerable<FirstWordsAnalyzer.Models.DerivedWordChainCellWithContext>
+
+@if (ViewBag.WordsPopularityWithCognates != null)
+{
+
+    <h2>Word information</h2>
+
+    <div>
+        <table class="table">
+            <tr>
+                <th>
+                    Text
+                </th>
+                <th>
+                    First Translation
+                </th>
+                <th>
+                    Second Translation
+                </th>
+                <th>
+                    Third Translation
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Differance
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @ViewBag.WordsPopularityWithCognates.Text
+                </td>
+                <td>
+                    @ViewBag.WordsPopularityWithCognates.FirstTranslationVariant
+                </td>
+                <td>
+                    @ViewBag.WordsPopularityWithCognates.SecondTranslationVariant
+                </td>
+                <td>
+                    @ViewBag.WordsPopularityWithCognates.ThirdTranslationVariant
+                </td>
+                <td>
+                    @ViewBag.WordsPopularityWithCognates.Quantity
+                </td>
+                <td>
+                    @ViewBag.WordsPopularityWithCognates.Differance
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", "Words", new { id = ViewBag.WordsPopularityWithCognates.WordId }, null) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+    <hr />
+}
+
+@*Блок производных слов*@
+@if (Model.Count() > 0)
+{
+    <h2>Derived Words Chain With Context</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Distance
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Text
+            </th>
+            <th>
+                Translation
+            </th>
+            <th>
+                Sentence
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DerivedWordQuantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DerivedWordText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DerivedWordFirstTranslationVariant)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DerivedWordSentenceText)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.DerivedWordId }) 
+                    @Html.ActionLink("Edit", "Edit", "Cognates", new { id = item.Id }, null)
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+@*Блок предложений*@
+<h2>Sentences With Word</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Sentance
+        </th>
+        <th>
+            Length
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.SentencesWithWord)
+    {
+        <tr>
+            <td>
+                @item.Text
+            </td>
+            <td>
+                @item.Length
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+

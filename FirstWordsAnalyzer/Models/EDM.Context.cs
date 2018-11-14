@@ -12,6 +12,8 @@ namespace FirstWordsAnalyzer.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class FirstWordsAnalyzerEntities : DbContext
     {
@@ -30,5 +32,24 @@ namespace FirstWordsAnalyzer.Models
         public virtual DbSet<SentenceWord> SentenceWords { get; set; }
         public virtual DbSet<Word> Words { get; set; }
         public virtual DbSet<Cognate> Cognates { get; set; }
+        public virtual DbSet<WordsPopularityWithCognates2> WordsPopularityWithCognates2 { get; set; }
+    
+        public virtual ObjectResult<GetChainOfDerivedWords_Result> GetChainOfDerivedWords(Nullable<int> basicWordId)
+        {
+            var basicWordIdParameter = basicWordId.HasValue ?
+                new ObjectParameter("basicWordId", basicWordId) :
+                new ObjectParameter("basicWordId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetChainOfDerivedWords_Result>("GetChainOfDerivedWords", basicWordIdParameter);
+        }
+    
+        public virtual ObjectResult<GetChainOfDerivedWordsWithContext_Result> GetChainOfDerivedWordsWithContext(Nullable<int> basicWordId)
+        {
+            var basicWordIdParameter = basicWordId.HasValue ?
+                new ObjectParameter("basicWordId", basicWordId) :
+                new ObjectParameter("basicWordId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetChainOfDerivedWordsWithContext_Result>("GetChainOfDerivedWordsWithContext", basicWordIdParameter);
+        }
     }
 }
