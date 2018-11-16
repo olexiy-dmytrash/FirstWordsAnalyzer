@@ -20,19 +20,9 @@ namespace FirstWordsAnalyzer.Controllers
         // GET: WordsPopularityWithCognates2
         public ActionResult Index(int? page)
         {
-            GetChainOfDerivedWords(12756);
             int pageSize = 30;
             int pageNumber = (page ?? 1);
             return View(db.WordsPopularityWithCognates2.ToList().OrderBy(i => i.Quantity).Reverse().ToPagedList(pageNumber, pageSize));
-        }
-
-
-        private void GetChainOfDerivedWords(int? wordId)
-        {
-            System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@wordId", wordId);
-            var cognates = db.Database.SqlQuery<DerivedWordChainCell>("GetChainOfDerivedWords @wordId", param);
-            foreach (var p in cognates)
-                wordId = p.BasicWordId;
         }
 
         // GET: WordsPopularityWithCognates2/Details/5
@@ -44,18 +34,19 @@ namespace FirstWordsAnalyzer.Controllers
             }
             System.Data.SqlClient.SqlParameter param = new System.Data.SqlClient.SqlParameter("@wordId", id);
             System.Data.SqlClient.SqlParameter param1 = new System.Data.SqlClient.SqlParameter("@wordId", id);
+            System.Data.SqlClient.SqlParameter param2 = new System.Data.SqlClient.SqlParameter("@wordId", id);
             var derivedWordsChainWithContext = db.Database.SqlQuery<DerivedWordChainCellWithContext>("GetChainOfDerivedWordsWithContext @wordId", param);
 
-            WordsPopularityWithCognates2 wordsPopularityWithCognates2 = db.WordsPopularityWithCognates2.Find(id);
-            ViewBag.WordsPopularityWithCognates = wordsPopularityWithCognates2;
+            var basicWordsChainWithContext = db.Database.SqlQuery<DerivedWordChainCellWithContext>("GetChainOfBasicWordsWithContext @wordId", param1);
 
-            var sentances = db.Database.SqlQuery<Sentence>("GetSentencesWithWord @wordId", param1);
+            var sentances = db.Database.SqlQuery<Sentence>("GetSentencesWithWord @wordId", param2);
+
+            WordsPopularityWithCognates2 wordsPopularityWithCognates2 = db.WordsPopularityWithCognates2.Find(id);
+
+            ViewBag.WordsPopularityWithCognates = wordsPopularityWithCognates2;
             ViewBag.SentencesWithWord = sentances.ToList();
-            //if (derivedWordsChainWithContext == null || wordsPopularityWithCognates2 == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            return View("DerivedWordsChainWithContextDetails", derivedWordsChainWithContext.ToList());
+
+            return View("DerivedWordsChainWithContextDetails", basicWordsChainWithContext.Union(derivedWordsChainWithContext).ToList());
         }
 
         // GET: WordsPopularityWithCognates2/Create

@@ -11,11 +11,11 @@ namespace FirstWordsAnalyzer.Models
         public int BasicWordId { get; set; }
         public int DerivedWordId { get; set; }
         public int Distance { get; set; }
-        public int DerivedWordQuantity { get; set; }
-        public string DerivedWordText { get; set; }
-        public string DerivedWordFirstTranslationVariant { get; set; }
-        public int DerivedWordSentenceId { get; set; }
-        public string DerivedWordSentenceText { get; set; }
+        public int Quantity { get; set; }
+        public string WordText { get; set; }
+        public string FirstTranslationVariant { get; set; }
+        public int SentenceId { get; set; }
+        public string SentenceText { get; set; }
 
     }
 }
