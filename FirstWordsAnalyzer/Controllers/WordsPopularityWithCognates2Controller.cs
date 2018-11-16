@@ -21,7 +21,7 @@ namespace FirstWordsAnalyzer.Controllers
         public ActionResult Index(int? page)
         {
             GetChainOfDerivedWords(12756);
-            int pageSize = 50;
+            int pageSize = 30;
             int pageNumber = (page ?? 1);
             return View(db.WordsPopularityWithCognates2.ToList().OrderBy(i => i.Quantity).Reverse().ToPagedList(pageNumber, pageSize));
         }
