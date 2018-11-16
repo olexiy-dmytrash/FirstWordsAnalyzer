@@ -65,6 +65,7 @@
 
     <table class="table">
         <tr>
+            <th></th>
             <th>
                 Distance
             </th>
@@ -80,33 +81,32 @@
             <th>
                 Sentence
             </th>
-            <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Distance)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DerivedWordQuantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DerivedWordText)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DerivedWordFirstTranslationVariant)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DerivedWordSentenceText)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.DerivedWordId }) |
-                    @Html.ActionLink("Edit", "Edit", "Cognates", new { id = item.Id }, null)
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.DerivedWordId }) |
+                @Html.ActionLink("Edit", "Edit", "Cognates", new { id = item.Id }, null)
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DerivedWordQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DerivedWordText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DerivedWordFirstTranslationVariant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DerivedWordSentenceText)
+            </td>
+        </tr>
         }
 
     </table>

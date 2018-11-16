@@ -10,6 +10,7 @@
 
 <table class="table">
     <tr>
+        <th></th>
         <th>
             Text
         </th>
@@ -23,40 +24,39 @@
             Third Translation
         </th>
         <th>
-           Quantity
+            Quantity
         </th>
         <th>
             Differance
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Text)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstTranslationVariant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SecondTranslationVariant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThirdTranslationVariant)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Differance)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", "Words", new { id = item.WordId }, null) |
-                @Html.ActionLink("Details", "Details", new { id = item.WordId })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "Words", new { id = item.WordId }, null) |
+            @Html.ActionLink("Details", "Details", new { id = item.WordId })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstTranslationVariant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SecondTranslationVariant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThirdTranslationVariant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Differance)
+        </td>
+    </tr>
     }
 
 </table>
