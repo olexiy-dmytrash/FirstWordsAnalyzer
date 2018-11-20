@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FirstWordsAnalyzer.Models;
+using PagedList;
 
 namespace FirstWordsAnalyzer.Controllers
 {
@@ -16,10 +17,25 @@ namespace FirstWordsAnalyzer.Controllers
         private FirstWordsAnalyzerEntities db = new FirstWordsAnalyzerEntities();
 
         // GET: Cognates
-        public async Task<ActionResult> Index()
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
             var cognates = db.Cognates.Include(c => c.Word).Include(c => c.Word1);
-            return View(await cognates.ToListAsync());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                cognates = db.Cognates.Include(c => c.Word).Include(c => c.Word1).Where(c => c.Word.Text.Contains(searchString) || c.Word1.Text.Contains(searchString));
+            }
+            int pageSize = 30;
+            int pageNumber = (page ?? 1);
+            return View(cognates.OrderBy(c => c.Word.Text).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Cognates/Details/5
