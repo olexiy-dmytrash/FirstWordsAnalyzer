@@ -45,6 +45,7 @@ namespace FirstWordsAnalyzer.Controllers
 
             ViewBag.WordsPopularityWithCognates = wordsPopularityWithCognates2;
             ViewBag.SentencesWithWord = sentances.ToList();
+            ViewBag.Id = id;
 
             return View("DerivedWordsChainWithContextDetails", basicWordsChainWithContext.Union(derivedWordsChainWithContext).ToList());
         }
