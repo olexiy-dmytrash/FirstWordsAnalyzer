@@ -17,36 +17,49 @@ namespace FirstWordsAnalyzer.Controllers
         private FirstWordsAnalyzerEntities db = new FirstWordsAnalyzerEntities();
 
         // GET: PotentialCognates
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
 
-            return View(CreateCognates());
+            return View(await CreateCognates());
 
         }
 
-        public IOrderedEnumerable<PotentialCognate> CreateCognates()
+        public async Task<List<PotentialCognate>> CreateCognates()
         {
-            var potentialCognates = db.PotentialCognates.ToList().OrderBy(c => c.BasicWordText).ThenBy(c => c.DerivedWordText);
+            var potentialCognates = await db.PotentialCognates.OrderBy(c => c.BasicWordText).ThenBy(c => c.DerivedWordText).ToListAsync();
             StringBuilder shortPreviousText = new StringBuilder("text for first iteration");
+            StringBuilder shortCurrentText = new StringBuilder("text for first iteration");
             Cognate cognate = new Cognate();
+            int matchLength = 0;
 
             foreach (PotentialCognate element in potentialCognates)
             {
 
                 if (!element.BasicWordText.Contains(shortPreviousText.ToString()))
                 {
+                    shortCurrentText = new StringBuilder(element.BasicWordText.Substring(0, element.BasicWordText.Length - 1));
                     cognate = new Cognate();
                     cognate.BasicWordId = (int)element.BasicWordId;
                     cognate.DerivedWordId = element.DerivedWordId;
-                    cognate.WordPart = element.DerivedWordText.Substring(element.BasicWordText.Length - 1);
+                    int indexOfSubstring = element.DerivedWordText.IndexOf(element.BasicWordText);
+                    if (indexOfSubstring == -1)
+                    {
+                        indexOfSubstring = element.DerivedWordText.IndexOf(shortCurrentText.ToString());
+                        matchLength = shortCurrentText.Length;
+                    }
+                    else
+                    {
+                        matchLength = element.BasicWordText.Length;
+                    }   
+                    cognate.WordPart = element.DerivedWordText.Substring(indexOfSubstring + matchLength);
                     db.Cognates.Add(cognate);
 
                 }
 
-                shortPreviousText = new StringBuilder(element.BasicWordText.Substring(0, element.BasicWordText.Length - 1));
+                shortPreviousText = shortCurrentText;
             }
 
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return potentialCognates;
         }

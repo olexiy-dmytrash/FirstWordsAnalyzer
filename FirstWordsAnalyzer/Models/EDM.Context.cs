@@ -20,6 +20,7 @@ namespace FirstWordsAnalyzer.Models
         public FirstWordsAnalyzerEntities()
             : base("name=FirstWordsAnalyzerEntities")
         {
+            this.Database.CommandTimeout = 60;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

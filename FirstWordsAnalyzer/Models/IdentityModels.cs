@@ -23,6 +23,7 @@ namespace FirstWordsAnalyzer.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            this.Database.CommandTimeout = 60;
         }
 
         public static ApplicationDbContext Create()
