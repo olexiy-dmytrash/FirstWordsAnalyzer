@@ -208,6 +208,7 @@
     <Compile Include="Controllers\CognatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PotentialCognatesController.cs" />
     <Compile Include="Controllers\SentencesController.cs" />
     <Compile Include="Controllers\WordsController.cs" />
     <Compile Include="Controllers\WordsPopularityWithCognates2Controller.cs" />
@@ -246,6 +247,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PotentialCognate.cs">
+      <DependentUpon>EDM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Sentence.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
@@ -364,6 +368,11 @@
     <Content Include="Views\Sentences\Details.cshtml" />
     <Content Include="Views\Sentences\Edit.cshtml" />
     <Content Include="Views\Sentences\Index.cshtml" />
+    <Content Include="Views\PotentialCognates\Create.cshtml" />
+    <Content Include="Views\PotentialCognates\Delete.cshtml" />
+    <Content Include="Views\PotentialCognates\Details.cshtml" />
+    <Content Include="Views\PotentialCognates\Edit.cshtml" />
+    <Content Include="Views\PotentialCognates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

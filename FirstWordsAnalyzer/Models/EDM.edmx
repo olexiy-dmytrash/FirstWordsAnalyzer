@@ -56,6 +56,21 @@
           <Property Name="NotBasic" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'FirstWordsAnalyzer.dbo.PotentialCognates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PotentialCognates">
+          <Key>
+            <PropertyRef Name="DerivedWordId" />
+            <PropertyRef Name="BasicWordText" />
+            <PropertyRef Name="DerivedWordText" />
+          </Key>
+          <Property Name="BasicWordId" Type="int" />
+          <Property Name="DerivedWordId" Type="int" Nullable="false" />
+          <Property Name="BasicWordText" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="DerivedWordText" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="BasicWordFirstTranslationVariant" Type="nvarchar" MaxLength="50" />
+          <Property Name="DerivedWordFirstTranslationVariant" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="WordsPopularityWithCognates2">
           <Key>
@@ -141,6 +156,16 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
           <EntitySet Name="Sentences" EntityType="Self.Sentences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SentenceWords" EntityType="Self.SentenceWords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Words" EntityType="Self.Words" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PotentialCognates" EntityType="Self.PotentialCognates" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PotentialCognates].[BasicWordId] AS [BasicWordId], 
+    [PotentialCognates].[DerivedWordId] AS [DerivedWordId], 
+    [PotentialCognates].[BasicWordText] AS [BasicWordText], 
+    [PotentialCognates].[DerivedWordText] AS [DerivedWordText], 
+    [PotentialCognates].[BasicWordFirstTranslationVariant] AS [BasicWordFirstTranslationVariant], 
+    [PotentialCognates].[DerivedWordFirstTranslationVariant] AS [DerivedWordFirstTranslationVariant]
+    FROM [dbo].[PotentialCognates] AS [PotentialCognates]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="WordsPopularityWithCognates2" EntityType="Self.WordsPopularityWithCognates2" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [WordsPopularityWithCognates2].[WordId] AS [WordId], 
@@ -208,8 +233,9 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
           <Parameter Name="basicWordId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetChainOfDerivedWordsWithContext" ReturnType="Collection(FirstWordsAnalyzerModel.GetChainOfDerivedWordsWithContext_Result)">
-            <Parameter Name="basicWordId" Mode="In" Type="Int32" />
+          <Parameter Name="basicWordId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="PotentialCognates" EntityType="FirstWordsAnalyzerModel.PotentialCognate" />
         </EntityContainer>
         <EntityType Name="Book">
           <Key>
@@ -359,6 +385,19 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
           <Property Type="Int32" Name="SentenceId" Nullable="false" />
           <Property Type="String" Name="SentenceText" Nullable="false" MaxLength="300" />
         </ComplexType>
+        <EntityType Name="PotentialCognate">
+          <Key>
+            <PropertyRef Name="DerivedWordId" />
+            <PropertyRef Name="BasicWordText" />
+            <PropertyRef Name="DerivedWordText" />
+          </Key>
+          <Property Name="BasicWordId" Type="Int32" />
+          <Property Name="DerivedWordId" Type="Int32" Nullable="false" />
+          <Property Name="BasicWordText" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="DerivedWordText" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="BasicWordFirstTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DerivedWordFirstTranslationVariant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -455,6 +494,18 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="PotentialCognates">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.PotentialCognate">
+              <MappingFragment StoreEntitySet="PotentialCognates">
+                <ScalarProperty Name="DerivedWordFirstTranslationVariant" ColumnName="DerivedWordFirstTranslationVariant" />
+                <ScalarProperty Name="BasicWordFirstTranslationVariant" ColumnName="BasicWordFirstTranslationVariant" />
+                <ScalarProperty Name="DerivedWordText" ColumnName="DerivedWordText" />
+                <ScalarProperty Name="BasicWordText" ColumnName="BasicWordText" />
+                <ScalarProperty Name="DerivedWordId" ColumnName="DerivedWordId" />
+                <ScalarProperty Name="BasicWordId" ColumnName="BasicWordId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

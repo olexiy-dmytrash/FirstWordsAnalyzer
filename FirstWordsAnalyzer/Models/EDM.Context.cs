@@ -33,6 +33,7 @@ namespace FirstWordsAnalyzer.Models
         public virtual DbSet<Word> Words { get; set; }
         public virtual DbSet<Cognate> Cognates { get; set; }
         public virtual DbSet<WordsPopularityWithCognates2> WordsPopularityWithCognates2 { get; set; }
+        public virtual DbSet<PotentialCognate> PotentialCognates { get; set; }
     
         public virtual ObjectResult<GetChainOfDerivedWords_Result> GetChainOfDerivedWords(Nullable<int> basicWordId)
         {
