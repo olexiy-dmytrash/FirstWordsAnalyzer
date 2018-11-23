@@ -97,7 +97,7 @@
             <tr>
                 <td>
                     @Html.ActionLink("Details", "Details", new { id = item.DerivedWordId }) |
-                    @Html.ActionLink("Edit", "Edit", "Cognates", new { id = item.Id }, null)
+                    @Html.ActionLink("Edit", "Index", "Cognates", new { currentFilter = item.DerivedWordId.ToString() }, null)
                     @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
                 </td>
                 <td>
