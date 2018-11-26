@@ -31,15 +31,15 @@ namespace FirstWordsAnalyzer.Controllers
             var cognates = db.Cognates.Include(c => c.Word).Include(c => c.Word1);
             if (!String.IsNullOrEmpty(searchString))
             {
-                try
+                int wordId = 0;
+                if (Int32.TryParse(searchString, out wordId))
                 {
-                    int wordId = Convert.ToInt32(searchString);
                     cognates = db.Cognates.Include(c => c.Word).Include(c => c.Word1).Where(c => c.Word.Id == wordId || c.Word1.Id == wordId);
                 }
-                catch (FormatException e)
+                else
                 {
                     cognates = db.Cognates.Include(c => c.Word).Include(c => c.Word1).Where(c => c.Word.Text.Contains(searchString) || c.Word1.Text.Contains(searchString));
-                }                
+                }            
             }
             int pageSize = 30;
             int pageNumber = (page ?? 1);
