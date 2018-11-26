@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[Cognates]  ADD CONSTRAINT AK_BasicWordId_DerivedWordId UNIQUE (BasicWordId, DerivedWordId)
