@@ -10,19 +10,32 @@ using System.Web.Mvc;
 using FirstWordsAnalyzer.Models;
 using PagedList.Mvc;
 using PagedList;
+using FirsWordsAnalyzer.DAL.Interfaces;
+using FirsWordsAnalyzer.DAL.Repositories;
 
 namespace FirstWordsAnalyzer.Controllers
 {
     public class WordsPopularityWithCognates2Controller : Controller
     {
         private FirstWordsAnalyzerEntities db = new FirstWordsAnalyzerEntities();
+        private IRepository<WordsPopularityWithCognates2> repository;
+
+        public WordsPopularityWithCognates2Controller(IRepository<WordsPopularityWithCognates2> moqRepository)
+        {
+            repository = moqRepository;
+        }
+
+        public WordsPopularityWithCognates2Controller()
+        {
+            this.repository = new WordsPopularityWithCognatesRepository(new FirstWordsAnalyzerEntities());
+        }
 
         // GET: WordsPopularityWithCognates2
         public ActionResult Index(int? page)
         {
             int pageSize = 30;
             int pageNumber = (page ?? 1);
-            return View(db.WordsPopularityWithCognates2.ToList().OrderBy(i => i.Quantity).Reverse().ToPagedList(pageNumber, pageSize));
+            return View(repository.GetAll().OrderBy(i => i.Quantity).Reverse().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: WordsPopularityWithCognates2/Details/5
