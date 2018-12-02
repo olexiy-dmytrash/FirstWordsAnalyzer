@@ -8,17 +8,30 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using FirstWordsAnalyzer.Models;
+using FirstWordsAnalyzer.Interfaces;
+using FirstWordsAnalyzer.Repositories;
 
 namespace FirstWordsAnalyzer.Controllers
 {
     public class BooksController : Controller
     {
         private FirstWordsAnalyzerEntities db = new FirstWordsAnalyzerEntities();
+        private IRepositoryAsynk<Book> repository;
+
+        public BooksController()
+        {
+            this.repository = new BookRepository(new FirstWordsAnalyzerEntities());
+        }
+
+        public BooksController(IRepositoryAsynk<Book> moqRepository)
+        {
+            repository = moqRepository;
+        }
 
         // GET: Books
         public async Task<ActionResult> Index()
         {
-            return View(await db.Books.ToListAsync());
+            return View(await repository.GetAllAsynk());
         }
 
         // GET: Books/Details/5
@@ -28,7 +41,7 @@ namespace FirstWordsAnalyzer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = await db.Books.FindAsync(id);
+            Book book = await repository.GetAsynk(id);
             if (book == null)
             {
                 return HttpNotFound();
@@ -51,8 +64,7 @@ namespace FirstWordsAnalyzer.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Books.Add(book);
-                await db.SaveChangesAsync();
+                var taskBook = await repository.Create(book);
                 return RedirectToAction("Index");
             }
 
