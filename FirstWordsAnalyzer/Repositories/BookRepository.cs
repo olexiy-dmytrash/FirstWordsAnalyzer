@@ -19,14 +19,13 @@ namespace FirstWordsAnalyzer.Repositories
         {
             this.db = context;
         }
-        public Task<Book> Create(Book item)
+        public Task Create(Book item)
         {
     
             var myTask = Task.Run(() =>
             {
                 db.Books.Add(item);
                 db.SaveChangesAsync();
-                return item;
             });
 
             return myTask;     

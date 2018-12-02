@@ -64,7 +64,7 @@ namespace FirstWordsAnalyzer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var taskBook = await repository.Create(book);
+                await repository.Create(book);
                 return RedirectToAction("Index");
             }
 

@@ -11,7 +11,7 @@ namespace FirstWordsAnalyzer.Interfaces
         Task<List<T>> GetAllAsynk();
         Task<T> GetAsynk(int? id);
         Task<List<T>> FindAsynk(Func<T, Boolean> predicate);
-        Task<T> Create(T item);
+        Task Create(T item);
         void Update(T item);
         void Delete(int id);
     }
