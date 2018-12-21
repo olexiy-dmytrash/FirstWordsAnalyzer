@@ -11,22 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.WordPart)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WordPart)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.WrongAssociation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.WrongAssociation)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Id)
         </dt>
 
@@ -35,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Word.Text)
+            @Html.DisplayName("Base")
         </dt>
 
         <dd>
@@ -43,11 +27,42 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Word1.Text)
+            @Html.DisplayName("Derived")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Word1.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Word part")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WordPart)
+        </dd>
+        <dt>
+            @Html.DisplayName("Base firs translation")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word.FirstTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Derived firs translation")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Word1.FirstTranslationVariant)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Wrong association")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WrongAssociation)
         </dd>
 
     </dl>
