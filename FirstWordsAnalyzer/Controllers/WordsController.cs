@@ -29,6 +29,7 @@ namespace FirstWordsAnalyzer.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
+
             var words = db.Words.Select(w => w);
                            
             if (!String.IsNullOrEmpty(searchString))

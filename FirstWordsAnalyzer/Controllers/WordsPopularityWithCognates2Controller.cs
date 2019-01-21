@@ -33,7 +33,7 @@ namespace FirstWordsAnalyzer.Controllers
         // GET: WordsPopularityWithCognates2
         public ActionResult Index(int? page)
         {
-            int pageSize = 30;
+            int pageSize = 31;
             int pageNumber = (page ?? 1);
             return View(repository.GetAll().OrderBy(i => i.Quantity).Reverse().ToPagedList(pageNumber, pageSize));
         }
