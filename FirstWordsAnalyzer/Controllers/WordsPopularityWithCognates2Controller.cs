@@ -33,7 +33,7 @@ namespace FirstWordsAnalyzer.Controllers
         // GET: WordsPopularityWithCognates2
         public ActionResult Index(int? page)
         {
-            int pageSize = 31;
+            int pageSize = 35;
             int pageNumber = (page ?? 1);
             return View(repository.GetAll().OrderBy(i => i.Quantity).Reverse().ToPagedList(pageNumber, pageSize));
         }
@@ -59,6 +59,7 @@ namespace FirstWordsAnalyzer.Controllers
             ViewBag.WordsPopularityWithCognates = wordsPopularityWithCognates2;
             ViewBag.SentencesWithWord = sentances.ToList();
             ViewBag.Id = id;
+            //my feature commit
 
             return View("DerivedWordsChainWithContextDetails", basicWordsChainWithContext.Union(derivedWordsChainWithContext).ToList());
         }
