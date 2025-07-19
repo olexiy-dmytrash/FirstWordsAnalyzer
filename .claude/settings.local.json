@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sqlcmd:*)",
+      "Bash(/opt/mssql-tools/bin/sqlcmd:*)",
+      "Bash(systemctl:*)",
+      "Bash(ss:*)",
+      "Bash(find:*)",
+      "Bash(cmd.exe /c \"sc query MSSQLSERVER\")",
+      "Bash(cmd.exe /c:*)",
+      "Bash(ls:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)",
+      "Bash(./run_sql.sh:*)",
+      "Bash(bash:*)",
+      "Bash(dos2unix:*)",
+      "Bash(sed:*)"
+    ],
+    "deny": []
+  }
+}
