@@ -291,8 +291,6 @@ GetSentencesWithWord
 На видалення:
 Views:
 BaseWordsPopularity
-ChainsOfDerivedWords
-ExistingWords
 UniqueDerivedWords
 
 StoredProcedures:
@@ -301,4 +299,8 @@ GetChainOfDerivedWords
 GetWordsPopularity
 MyProcedure
 SetWrongAssociation
+
+Видалені помилково:
+ExistingWords
+ChainsOfDerivedWords
 
