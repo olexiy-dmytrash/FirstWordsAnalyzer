@@ -9,7 +9,7 @@ namespace FirsWordsAnalyzer.DAL.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<WordsPopularityWithCognates> WordsPopularitiesWithCognates { get; }
+        IRepository<WordsPopularityWithCognates2> WordsPopularitiesWithCognates { get; }
         void Save();
     }
 }

@@ -12,7 +12,7 @@ namespace FirstWordsAnalyzer.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WordsPopularityWithCognates
+    public partial class WordsPopularityWithCognates2
     {
         public int WordId { get; set; }
         public string Text { get; set; }

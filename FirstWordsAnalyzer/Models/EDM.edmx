@@ -71,8 +71,8 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.PotentialCognates' does not
           <Property Name="DerivedWordFirstTranslationVariant" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="WordsPopularityWithCognates">
+warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WordsPopularityWithCognates2">
           <Key>
             <PropertyRef Name="WordId" />
           </Key>
@@ -163,16 +163,16 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
     [PotentialCognates].[DerivedWordFirstTranslationVariant] AS [DerivedWordFirstTranslationVariant]
     FROM [dbo].[PotentialCognates] AS [PotentialCognates]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="WordsPopularityWithCognates" EntityType="Self.WordsPopularityWithCognates" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="WordsPopularityWithCognates2" EntityType="Self.WordsPopularityWithCognates2" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [WordsPopularityWithCognates].[WordId] AS [WordId], 
-    [WordsPopularityWithCognates].[Text] AS [Text], 
-    [WordsPopularityWithCognates].[FirstTranslationVariant] AS [FirstTranslationVariant], 
-    [WordsPopularityWithCognates].[SecondTranslationVariant] AS [SecondTranslationVariant], 
-    [WordsPopularityWithCognates].[ThirdTranslationVariant] AS [ThirdTranslationVariant], 
-    [WordsPopularityWithCognates].[Quantity] AS [Quantity], 
-    [WordsPopularityWithCognates].[Differance] AS [Differance]
-    FROM [dbo].[WordsPopularityWithCognates] AS [WordsPopularityWithCognates]</DefiningQuery>
+    [WordsPopularityWithCognates2].[WordId] AS [WordId], 
+    [WordsPopularityWithCognates2].[Text] AS [Text], 
+    [WordsPopularityWithCognates2].[FirstTranslationVariant] AS [FirstTranslationVariant], 
+    [WordsPopularityWithCognates2].[SecondTranslationVariant] AS [SecondTranslationVariant], 
+    [WordsPopularityWithCognates2].[ThirdTranslationVariant] AS [ThirdTranslationVariant], 
+    [WordsPopularityWithCognates2].[Quantity] AS [Quantity], 
+    [WordsPopularityWithCognates2].[Differance] AS [Differance]
+    FROM [dbo].[WordsPopularityWithCognates2] AS [WordsPopularityWithCognates2]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__Cognates__BasicW__5812160E" Association="Self.FK__Cognates__BasicW__5812160E">
             <End Role="Words" EntitySet="Words" />
@@ -225,7 +225,7 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
             <End Role="Word" EntitySet="Words" />
             <End Role="Cognate" EntitySet="Cognates" />
           </AssociationSet>
-          <EntitySet Name="WordsPopularityWithCognates" EntityType="FirstWordsAnalyzerModel.WordsPopularityWithCognates" />
+          <EntitySet Name="WordsPopularityWithCognates2" EntityType="FirstWordsAnalyzerModel.WordsPopularityWithCognates2" />
           <FunctionImport Name="GetChainOfDerivedWordsWithContext" ReturnType="Collection(FirstWordsAnalyzerModel.GetChainOfDerivedWordsWithContext_Result)">
           <Parameter Name="basicWordId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -351,7 +351,7 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="WordsPopularityWithCognates">
+        <EntityType Name="WordsPopularityWithCognates2">
           <Key>
             <PropertyRef Name="WordId" />
           </Key>
@@ -445,9 +445,9 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WordsPopularityWithCognates">
-            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.WordsPopularityWithCognates">
-              <MappingFragment StoreEntitySet="WordsPopularityWithCognates">
+          <EntitySetMapping Name="WordsPopularityWithCognates2">
+            <EntityTypeMapping TypeName="FirstWordsAnalyzerModel.WordsPopularityWithCognates2">
+              <MappingFragment StoreEntitySet="WordsPopularityWithCognates2">
                 <ScalarProperty Name="Differance" ColumnName="Differance" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ThirdTranslationVariant" ColumnName="ThirdTranslationVariant" />

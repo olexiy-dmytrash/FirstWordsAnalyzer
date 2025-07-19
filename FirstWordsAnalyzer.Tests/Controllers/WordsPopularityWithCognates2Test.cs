@@ -11,15 +11,15 @@ using Moq;
 namespace FirstWordsAnalyzer.Tests.Controllers
 {
     [TestClass]
-    public class WordsPopularityWithCognatesTest
+    public class WordsPopularityWithCognates2Test
     {
         [TestMethod]
         public void Index()
         {
             // Arrange
-            var mock = new Mock<IRepository<WordsPopularityWithCognates>>();
-            mock.Setup(a => a.GetAll()).Returns(new List<WordsPopularityWithCognates>());
-            WordsPopularityWithCognatesController controller = new WordsPopularityWithCognatesController(mock.Object);
+            var mock = new Mock<IRepository<WordsPopularityWithCognates2>>();
+            mock.Setup(a => a.GetAll()).Returns(new List<WordsPopularityWithCognates2>());
+            WordsPopularityWithCognates2Controller controller = new WordsPopularityWithCognates2Controller(mock.Object);
 
             // Act
             ViewResult result = controller.Index(null) as ViewResult;

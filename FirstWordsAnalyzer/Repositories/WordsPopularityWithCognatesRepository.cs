@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FirsWordsAnalyzer.DAL.Repositories
 {
-    class WordsPopularityWithCognatesRepository : IRepository<WordsPopularityWithCognates>
+    class WordsPopularityWithCognatesRepository : IRepository<WordsPopularityWithCognates2>
     {
 
         private FirstWordsAnalyzerEntities db;
@@ -18,7 +18,7 @@ namespace FirsWordsAnalyzer.DAL.Repositories
             this.db = context;
         }
 
-        public void Create(WordsPopularityWithCognates item)
+        public void Create(WordsPopularityWithCognates2 item)
         {
             throw new NotImplementedException();
         }
@@ -28,22 +28,22 @@ namespace FirsWordsAnalyzer.DAL.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<WordsPopularityWithCognates> Find(Func<WordsPopularityWithCognates, bool> predicate)
+        public IEnumerable<WordsPopularityWithCognates2> Find(Func<WordsPopularityWithCognates2, bool> predicate)
         {
-            return db.WordsPopularityWithCognates.Where(predicate).ToList();
+            return db.WordsPopularityWithCognates2.Where(predicate).ToList();
         }
 
-        public WordsPopularityWithCognates Get(int id)
+        public WordsPopularityWithCognates2 Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<WordsPopularityWithCognates> GetAll()
+        public IEnumerable<WordsPopularityWithCognates2> GetAll()
         {
-            return db.WordsPopularityWithCognates;
+            return db.WordsPopularityWithCognates2;
         }
 
-        public void Update(WordsPopularityWithCognates item)
+        public void Update(WordsPopularityWithCognates2 item)
         {
             throw new NotImplementedException();
         }
