@@ -15,22 +15,22 @@ using FirsWordsAnalyzer.DAL.Repositories;
 
 namespace FirstWordsAnalyzer.Controllers
 {
-    public class WordsPopularityWithCognates2Controller : Controller
+    public class WordsPopularityWithCognatesController : Controller
     {
         private FirstWordsAnalyzerEntities db = new FirstWordsAnalyzerEntities();
-        private IRepository<WordsPopularityWithCognates2> repository;
+        private IRepository<WordsPopularityWithCognates> repository;
 
-        public WordsPopularityWithCognates2Controller(IRepository<WordsPopularityWithCognates2> moqRepository)
+        public WordsPopularityWithCognatesController(IRepository<WordsPopularityWithCognates> moqRepository)
         {
             repository = moqRepository;
         }
 
-        public WordsPopularityWithCognates2Controller()
+        public WordsPopularityWithCognatesController()
         {
             this.repository = new WordsPopularityWithCognatesRepository(new FirstWordsAnalyzerEntities());
         }
 
-        // GET: WordsPopularityWithCognates2
+        // GET: WordsPopularityWithCognates
         public ActionResult Index(int? page)
         {
             int pageSize = 32;
@@ -38,7 +38,7 @@ namespace FirstWordsAnalyzer.Controllers
             return View(repository.GetAll().OrderBy(i => i.Quantity).Reverse().ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: WordsPopularityWithCognates2/Details/5
+        // GET: WordsPopularityWithCognates/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -54,7 +54,7 @@ namespace FirstWordsAnalyzer.Controllers
 
             var sentances = db.Database.SqlQuery<Sentence>("GetSentencesWithWord @wordId", param2);
 
-            WordsPopularityWithCognates2 wordsPopularityWithCognates2 = db.WordsPopularityWithCognates2.Find(id);
+            WordsPopularityWithCognates wordsPopularityWithCognates2 = db.WordsPopularityWithCognates.Find(id);
 
             ViewBag.WordsPopularityWithCognates = wordsPopularityWithCognates2;
             ViewBag.SentencesWithWord = sentances.ToList();
@@ -64,22 +64,22 @@ namespace FirstWordsAnalyzer.Controllers
             return View("DerivedWordsChainWithContextDetails", basicWordsChainWithContext.Union(derivedWordsChainWithContext).ToList());
         }
 
-        // GET: WordsPopularityWithCognates2/Create
+        // GET: WordsPopularityWithCognates/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: WordsPopularityWithCognates2/Create
+        // POST: WordsPopularityWithCognates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "WordId,Text,FirstTranslationVariant,SecondTranslationVariant,ThirdTranslationVariant,Quantity,Differance")] WordsPopularityWithCognates2 wordsPopularityWithCognates2)
+        public async Task<ActionResult> Create([Bind(Include = "WordId,Text,FirstTranslationVariant,SecondTranslationVariant,ThirdTranslationVariant,Quantity,Differance")] WordsPopularityWithCognates wordsPopularityWithCognates2)
         {
             if (ModelState.IsValid)
             {
-                db.WordsPopularityWithCognates2.Add(wordsPopularityWithCognates2);
+                db.WordsPopularityWithCognates.Add(wordsPopularityWithCognates2);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -87,14 +87,14 @@ namespace FirstWordsAnalyzer.Controllers
             return View(wordsPopularityWithCognates2);
         }
 
-        // GET: WordsPopularityWithCognates2/Edit/5
+        // GET: WordsPopularityWithCognates/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WordsPopularityWithCognates2 wordsPopularityWithCognates2 = await db.WordsPopularityWithCognates2.FindAsync(id);
+            WordsPopularityWithCognates wordsPopularityWithCognates2 = await db.WordsPopularityWithCognates.FindAsync(id);
             if (wordsPopularityWithCognates2 == null)
             {
                 return HttpNotFound();
@@ -102,12 +102,12 @@ namespace FirstWordsAnalyzer.Controllers
             return View(wordsPopularityWithCognates2);
         }
 
-        // POST: WordsPopularityWithCognates2/Edit/5
+        // POST: WordsPopularityWithCognates/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "WordId,Text,FirstTranslationVariant,SecondTranslationVariant,ThirdTranslationVariant,Quantity,Differance")] WordsPopularityWithCognates2 wordsPopularityWithCognates2)
+        public async Task<ActionResult> Edit([Bind(Include = "WordId,Text,FirstTranslationVariant,SecondTranslationVariant,ThirdTranslationVariant,Quantity,Differance")] WordsPopularityWithCognates wordsPopularityWithCognates2)
         {
             if (ModelState.IsValid)
             {
@@ -118,14 +118,14 @@ namespace FirstWordsAnalyzer.Controllers
             return View(wordsPopularityWithCognates2);
         }
 
-        // GET: WordsPopularityWithCognates2/Delete/5
+        // GET: WordsPopularityWithCognates/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WordsPopularityWithCognates2 wordsPopularityWithCognates2 = await db.WordsPopularityWithCognates2.FindAsync(id);
+            WordsPopularityWithCognates wordsPopularityWithCognates2 = await db.WordsPopularityWithCognates.FindAsync(id);
             if (wordsPopularityWithCognates2 == null)
             {
                 return HttpNotFound();
@@ -133,13 +133,13 @@ namespace FirstWordsAnalyzer.Controllers
             return View(wordsPopularityWithCognates2);
         }
 
-        // POST: WordsPopularityWithCognates2/Delete/5
+        // POST: WordsPopularityWithCognates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            WordsPopularityWithCognates2 wordsPopularityWithCognates2 = await db.WordsPopularityWithCognates2.FindAsync(id);
-            db.WordsPopularityWithCognates2.Remove(wordsPopularityWithCognates2);
+            WordsPopularityWithCognates wordsPopularityWithCognates2 = await db.WordsPopularityWithCognates.FindAsync(id);
+            db.WordsPopularityWithCognates.Remove(wordsPopularityWithCognates2);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

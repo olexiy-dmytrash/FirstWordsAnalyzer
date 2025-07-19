@@ -214,7 +214,7 @@
     <Compile Include="Controllers\PotentialCognatesController.cs" />
     <Compile Include="Controllers\SentencesController.cs" />
     <Compile Include="Controllers\WordsController.cs" />
-    <Compile Include="Controllers\WordsPopularityWithCognates2Controller.cs" />
+    <Compile Include="Controllers\WordsPopularityWithCognatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,7 +259,7 @@
     <Compile Include="Models\Word.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\WordsPopularityWithCognates2.cs">
+    <Compile Include="Models\WordsPopularityWithCognates.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -359,12 +359,12 @@
     <Content Include="Views\Cognates\Details.cshtml" />
     <Content Include="Views\Cognates\Edit.cshtml" />
     <Content Include="Views\Cognates\Index.cshtml" />
-    <Content Include="Views\WordsPopularityWithCognates2\Create.cshtml" />
-    <Content Include="Views\WordsPopularityWithCognates2\Delete.cshtml" />
-    <Content Include="Views\WordsPopularityWithCognates2\Details.cshtml" />
-    <Content Include="Views\WordsPopularityWithCognates2\Edit.cshtml" />
-    <Content Include="Views\WordsPopularityWithCognates2\Index.cshtml" />
-    <Content Include="Views\WordsPopularityWithCognates2\DerivedWordsChainWithContextDetails.cshtml" />
+    <Content Include="Views\WordsPopularityWithCognates\Create.cshtml" />
+    <Content Include="Views\WordsPopularityWithCognates\Delete.cshtml" />
+    <Content Include="Views\WordsPopularityWithCognates\Details.cshtml" />
+    <Content Include="Views\WordsPopularityWithCognates\Edit.cshtml" />
+    <Content Include="Views\WordsPopularityWithCognates\Index.cshtml" />
+    <Content Include="Views\WordsPopularityWithCognates\DerivedWordsChainWithContextDetails.cshtml" />
     <Content Include="Views\Sentences\Create.cshtml" />
     <Content Include="Views\Sentences\Delete.cshtml" />
     <Content Include="Views\Sentences\Details.cshtml" />
