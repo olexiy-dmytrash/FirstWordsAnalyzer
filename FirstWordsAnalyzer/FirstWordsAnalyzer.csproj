@@ -245,9 +245,6 @@
     <Compile Include="Models\GetChainOfDerivedWordsWithContext_Result.cs">
       <DependentUpon>EDM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\GetChainOfDerivedWords_Result.cs">
-      <DependentUpon>EDM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PotentialCognate.cs">

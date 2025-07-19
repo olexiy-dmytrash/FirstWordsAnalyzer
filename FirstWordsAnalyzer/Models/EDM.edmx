@@ -144,9 +144,6 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="GetChainOfDerivedWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="basicWordId" Type="int" Mode="In" />
-        </Function>
         <Function Name="GetChainOfDerivedWordsWithContext" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="basicWordId" Type="int" Mode="In" />
         </Function>
@@ -229,9 +226,6 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
             <End Role="Cognate" EntitySet="Cognates" />
           </AssociationSet>
           <EntitySet Name="WordsPopularityWithCognates2" EntityType="FirstWordsAnalyzerModel.WordsPopularityWithCognates2" />
-          <FunctionImport Name="GetChainOfDerivedWords" ReturnType="Collection(FirstWordsAnalyzerModel.GetChainOfDerivedWords_Result)">
-          <Parameter Name="basicWordId" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetChainOfDerivedWordsWithContext" ReturnType="Collection(FirstWordsAnalyzerModel.GetChainOfDerivedWordsWithContext_Result)">
           <Parameter Name="basicWordId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -369,12 +363,6 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Differance" Type="Int32" />
         </EntityType>
-        <ComplexType Name="GetChainOfDerivedWords_Result">
-          <Property Type="Int32" Name="BasicWordId" Nullable="true" />
-          <Property Type="Int32" Name="DerivedWordId" Nullable="true" />
-          <Property Type="Int32" Name="distance" Nullable="true" />
-          <Property Type="Int32" Name="Quantity" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="GetChainOfDerivedWordsWithContext_Result">
           <Property Type="Int32" Name="BasicWordId" Nullable="true" />
           <Property Type="Int32" Name="DerivedWordId" Nullable="true" />
@@ -470,16 +458,6 @@ warning 6002: The table/view 'FirstWordsAnalyzer.dbo.WordsPopularityWithCognates
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetChainOfDerivedWords" FunctionName="FirstWordsAnalyzerModel.Store.GetChainOfDerivedWords">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="FirstWordsAnalyzerModel.GetChainOfDerivedWords_Result">
-                <ScalarProperty Name="BasicWordId" ColumnName="BasicWordId" />
-                <ScalarProperty Name="DerivedWordId" ColumnName="DerivedWordId" />
-                <ScalarProperty Name="distance" ColumnName="distance" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetChainOfDerivedWordsWithContext" FunctionName="FirstWordsAnalyzerModel.Store.GetChainOfDerivedWordsWithContext">
             <ResultMapping>
               <ComplexTypeMapping TypeName="FirstWordsAnalyzerModel.GetChainOfDerivedWordsWithContext_Result">

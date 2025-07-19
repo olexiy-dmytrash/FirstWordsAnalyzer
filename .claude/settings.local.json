@@ -15,7 +15,9 @@
       "Bash(./run_sql.sh:*)",
       "Bash(bash:*)",
       "Bash(dos2unix:*)",
-      "Bash(sed:*)"
+      "Bash(sed:*)",
+      "Bash(rm:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }

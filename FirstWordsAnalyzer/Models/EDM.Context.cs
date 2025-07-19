@@ -36,14 +36,6 @@ namespace FirstWordsAnalyzer.Models
         public virtual DbSet<WordsPopularityWithCognates2> WordsPopularityWithCognates2 { get; set; }
         public virtual DbSet<PotentialCognate> PotentialCognates { get; set; }
     
-        public virtual ObjectResult<GetChainOfDerivedWords_Result> GetChainOfDerivedWords(Nullable<int> basicWordId)
-        {
-            var basicWordIdParameter = basicWordId.HasValue ?
-                new ObjectParameter("basicWordId", basicWordId) :
-                new ObjectParameter("basicWordId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetChainOfDerivedWords_Result>("GetChainOfDerivedWords", basicWordIdParameter);
-        }
     
         public virtual ObjectResult<GetChainOfDerivedWordsWithContext_Result> GetChainOfDerivedWordsWithContext(Nullable<int> basicWordId)
         {
