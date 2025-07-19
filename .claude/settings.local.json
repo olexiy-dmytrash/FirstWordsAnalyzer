@@ -17,7 +17,10 @@
       "Bash(dos2unix:*)",
       "Bash(sed:*)",
       "Bash(rm:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(claude --version)",
+      "Bash(dir:*)"
     ],
     "deny": []
   }
